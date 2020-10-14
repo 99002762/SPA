@@ -50,7 +50,8 @@
             $show("div1");
             let data = mgr.getAll();
             data.forEach(emp => {
-                let row = `<tr><td>${emp.empId}</td><td>${emp.empName}</td><td>${emp.empAddress}</td><td><a href="#" class="edit" sId="${emp.empId}">Edit</a></td>`;
+                let row = `<tr><td>${emp.empId}</td><td>${emp.empName}</td><td>${emp.empAddress}</td><td>
+                    <a href="#" class="edit" sId="${emp.empId}">Edit</a><br><a href="#" class="delete" sId="${emp.empId}">Delete</a></td>`;
                 $('tblRecords').innerHTML += row;
                 $mapEvent("edit", function(){
                     debugger;
@@ -62,6 +63,24 @@
                     $hide("div1");
                     $hide("div3");
                     $show("div2");
+                })
+                $mapDelete("delete", function(){
+                    debugger;
+                    if(confirm("Are you Sure you Want to Delete"))
+                    {
+                        let selectedId = this.attributes["sid"].value;
+                        let empObj = mgr.findEmployee(selectedId);
+                        mgr.deleteEmployee(empObj.empId)
+                        $hide("div1");
+                        $hide("div3");
+                        $hide("div2");
+                    }
+                    else{
+                        $show("div1");
+                        $hide("div3");
+                        $hide("div2");
+                    }
+                    
                 })
             });
         }
