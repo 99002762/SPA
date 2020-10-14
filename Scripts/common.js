@@ -15,3 +15,9 @@ function $mapEvent(classname, callbackFn){
 		allElements[i].onclick = callbackFn;
 	}
 }
+function $mapDelete(classname, callbackFn){
+		let allElements = document.getElementsByClassName(classname);
+		for(let i = 0; i < allElements.length; i++){
+			allElements[i].onclick = callbackFn;
+		}
+}
